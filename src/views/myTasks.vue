@@ -1,10 +1,15 @@
 <template>
   <div>
-    <addTask />
+    <addMyTask
+    v-on:task-data = "taskData"
+    />
     <hr/>
     <taskList
     v-if = "mytasks.length"
     v-bind:mytasks = "mytasks"
+
+    v-on:task-done="taskDone"
+    @task-ongoing="taskOngoing"
     />
     <p v-else>No tasks yet</p>
     <usersList
@@ -17,9 +22,9 @@
 </template>
 
 <script>
-import addTask from '@/components/addTask.vue'
 import taskList from '@/components/mytask/taskList.vue'
-import usersList from '@/components/mytask/usersList'
+import usersList from '@/components/users/usersList'
+import addMyTask from '@/components/mytask/addMyTask'
 
 export default {
   props: {
@@ -33,7 +38,7 @@ export default {
     }
   },
   components: {
-    addTask, taskList, usersList
+    taskList, usersList, addMyTask
   },
   methods: {
     userAccept (id) {
@@ -41,6 +46,15 @@ export default {
     },
     userBlock (id) {
       this.$emit('user-block', id)
+    },
+    taskData (task) {
+      this.$emit('task-data', task)
+    },
+    taskDone (id) {
+      this.$emit('task-done', id)
+    },
+    taskOngoing (id) {
+      this.$emit('task-ongoing', id)
     }
   }
 }

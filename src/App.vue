@@ -2,8 +2,8 @@
   <div id="app">
     <h1>Task Monk ToDo List</h1>
     <nav>
-      <router-link to = "/">Public Task</router-link>
-      <router-link to = "/mytask">My Task </router-link>
+      <router-link to = "/public">Public Task</router-link>
+      <router-link to = "/">My Task </router-link>
     </nav>
     <router-view
     v-bind:users = "users"
@@ -11,6 +11,9 @@
 
     v-on:user-accept = "userAccept"
     v-on:user-block = "userBlock"
+    v-on:task-data = "addTask"
+    v-on:task-done = "taskDone"
+    @task-ongoing="taskOngoing"
     />
   </div>
 </template>
@@ -33,13 +36,32 @@ export default {
   },
   methods: {
     userAccept (id) {
-      console.log(id)
+      console.log('Пользователь с ' + id + ' одобрен')
       const currentUser = this.users.find(item => item.id === id)
       currentUser.status = 'active'
     },
     userBlock (id) {
+      console.log('Пользователь с ' + id + ' заблокирован')
       const currentUser = this.users.find(u => u.id === id)
       currentUser.status = 'blocked'
+    },
+    addTask (task) {
+      if (task.length) {
+        const newTask = {
+          id: Date.now(),
+          taskname: task,
+          done: false
+        }
+        this.mytasks.push(newTask)
+      }
+    },
+    taskDone (id) {
+      const currentTask = this.mytasks.find(t => t.id === id)
+      currentTask.done = true
+    },
+    taskOngoing (id) {
+      const currentTask = this.mytasks.find(t => t.id === id)
+      currentTask.done = false
     }
   }
 }

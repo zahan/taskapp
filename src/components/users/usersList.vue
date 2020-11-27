@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import userItem from '@/components/mytask/userItem'
+import userItem from './userItem'
 
 export default {
   props: {

@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import toDoList from '@/components/toDoList'
-import addTask from '@/components/addTask'
+import toDoList from '@/components/publicTasks/toDoList'
+import addTask from '@/components/publicTasks/addTask'
 import loader from '@/components/loader'
 
 export default {

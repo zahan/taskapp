@@ -5,14 +5,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/public',
     name: 'Public Task',
-    component: () => import('./../views/publicTasks.vue')
+    component: () => import('@/views/publicTasks.vue')
   },
   {
-    path: '/mytask',
+    path: '/',
     name: 'My Task',
-    component: () => import('./../views/myTasks.vue')
+    component: () => import('@/views/myTasks.vue')
   }
 ]
 

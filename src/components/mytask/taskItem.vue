@@ -1,7 +1,14 @@
 <template>
   <li>
-    <span>
-      <input type="checkbox">
+    <span v-bind:class="{ done: task.done }">
+      <button
+      v-if="!task.done"
+      v-on:click="$emit('task-done', task.id)"
+      >Done</button>
+      <button
+      v-else
+      @click="$emit('task-ongoing', task.id)"
+      >Ongoing</button>
       {{ task.taskname }}
     </span>
   </li>
@@ -12,3 +19,9 @@ export default {
   props: ['task']
 }
 </script>
+
+<style scoped>
+.done {
+  text-decoration: line-through;
+}
+</style>
