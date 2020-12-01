@@ -2,18 +2,22 @@
   <div id="app">
     <h1>Task Monk ToDo List</h1>
     <nav>
+      <router-link to = "/">My Task</router-link>
       <router-link to = "/public">Public Task</router-link>
-      <router-link to = "/">My Task </router-link>
+      <router-link to = "/archived">Archived Task</router-link>
     </nav>
     <router-view
     v-bind:users = "users"
     v-bind:mytasks = "mytasks"
+    v-bind:archived="archived"
 
     v-on:user-accept = "userAccept"
     v-on:user-block = "userBlock"
     v-on:task-data = "addTask"
     v-on:task-done = "taskDone"
     @task-ongoing="taskOngoing"
+    @to-archive="toArchive"
+    @activate-task="activateTask"
     />
   </div>
 </template>
@@ -27,10 +31,15 @@ export default {
         { id: 2, userName: 'Anatoliy', status: 'moderate' },
         { id: 3, userName: 'Vasya', status: 'blocked' }
       ],
+      // Я вынес архивные задачи в одельный массив это норм?
       mytasks: [
         { id: 1, taskname: 'Купить молочка', done: false },
         { id: 2, taskname: 'Купить хлебушка', done: false },
         { id: 3, taskname: 'Купить сметанки', done: false }
+      ],
+      archived: [
+        { id: 909, taskname: 'Купить вафелек' },
+        { id: 910, taskname: 'Купить печенек x3' }
       ]
     }
   },
@@ -62,6 +71,30 @@ export default {
     taskOngoing (id) {
       const currentTask = this.mytasks.find(t => t.id === id)
       currentTask.done = false
+    },
+    // Правильно передавать сюда только айди компонента или лучше весь объект?
+    // Как лучше перенести объект в другой массив?
+    toArchive (id) {
+      const currentTask = this.mytasks.find(t => t.id === id)
+      const archivedTask = {
+        id: Date.now(),
+        taskname: currentTask.taskname
+      }
+      this.archived.push(archivedTask)
+      // Как правильно удалить объект из массива
+      const currentIndex = this.mytasks.indexOf(currentTask)
+      this.mytasks.splice(currentIndex, 1)
+    },
+    activateTask (task) {
+      const rebornTask = {
+        id: task.id,
+        taskname: task.taskname,
+        done: false
+      }
+      this.mytasks.unshift(rebornTask)
+      // Можно использовать одни и те же названия переменных?
+      const currentIndex = this.archived.indexOf(task)
+      this.archived.splice(currentIndex, 1)
     }
   }
 }

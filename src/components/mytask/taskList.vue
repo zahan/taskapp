@@ -7,6 +7,7 @@
 
     v-on:task-done="taskDone"
     @task-ongoing="taskOngoing"
+    @to-archive="toArchive"
      />
   </ul>
 </template>
@@ -21,6 +22,9 @@ export default {
     },
     taskOngoing (id) {
       this.$emit('task-ongoing', id)
+    },
+    toArchive (id) {
+      this.$emit('to-archive', id)
     }
   },
   components: {

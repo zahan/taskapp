@@ -5,14 +5,19 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'My Task',
+    component: () => import('@/views/myTasks.vue')
+  },
+  {
     path: '/public',
     name: 'Public Task',
     component: () => import('@/views/publicTasks.vue')
   },
   {
-    path: '/',
-    name: 'My Task',
-    component: () => import('@/views/myTasks.vue')
+    path: '/archived',
+    name: 'Archived Task',
+    component: () => import('@/views/archivedTasks.vue')
   }
 ]
 

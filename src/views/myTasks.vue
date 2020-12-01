@@ -4,14 +4,28 @@
     v-on:task-data = "taskData"
     />
     <hr/>
+    <h3>Todo<span>{{ arrLength }}</span></h3>
+    <hr/>
     <taskList
-    v-if = "mytasks.length"
-    v-bind:mytasks = "mytasks"
+    v-if = "ongoingTasksList.length"
+    v-bind:mytasks = "ongoingTasksList"
 
     v-on:task-done="taskDone"
     @task-ongoing="taskOngoing"
     />
     <p v-else>No tasks yet</p>
+    <h3>Done</h3>
+    <hr/>
+    <taskList
+    v-if = "doneTasksList.length"
+    v-bind:mytasks = "doneTasksList"
+
+    v-on:task-done="taskDone"
+    @task-ongoing="taskOngoing"
+    @to-archive="toArchive"
+    />
+    <p v-else>No tasks yet</p>
+    <hr/>
     <usersList
     v-bind:users = "users"
 
@@ -55,6 +69,22 @@ export default {
     },
     taskOngoing (id) {
       this.$emit('task-ongoing', id)
+    },
+    toArchive (id) {
+      this.$emit('to-archive', id)
+    }
+  },
+  computed: {
+    doneTasksList () {
+      return this.mytasks.filter(t => t.done)
+    },
+    ongoingTasksList () {
+      return this.mytasks.filter(t => !t.done)
+    },
+    // Может можно посчитать активные задачи короче?
+    arrLength () {
+      const doneCounter = this.mytasks.filter(t => !t.done)
+      return doneCounter.length
     }
   }
 }

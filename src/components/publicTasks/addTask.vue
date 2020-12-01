@@ -14,7 +14,6 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log('submit', this.taskData)
       if (this.taskData.trim()) {
         const newTask = {
           id: Date.now(),
