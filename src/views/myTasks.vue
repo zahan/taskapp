@@ -4,7 +4,7 @@
     v-on:task-data = "taskData"
     />
     <hr/>
-    <h3>Todo<span>{{ arrLength }}</span></h3>
+    <span class="big_counter">{{ arrLength }}</span>
     <hr/>
     <taskList
     v-if = "ongoingTasksList.length"

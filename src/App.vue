@@ -22,6 +22,12 @@
   </div>
 </template>
 
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+@import './assets/style.scss';
+</style>
+
 <script>
 export default {
   data () {
@@ -57,6 +63,7 @@ export default {
     addTask (task) {
       if (task.length) {
         const newTask = {
+          // Как создавать айдишники правильно?
           id: Date.now(),
           taskname: task,
           done: false
