@@ -1,10 +1,9 @@
 <template>
   <div>
+    <hr/>
     <addMyTask
     v-on:task-data = "taskData"
     />
-    <hr/>
-    <span class="big_counter">{{ arrLength }}</span>
     <hr/>
     <taskList
     v-if = "ongoingTasksList.length"
@@ -80,11 +79,6 @@ export default {
     },
     ongoingTasksList () {
       return this.mytasks.filter(t => !t.done)
-    },
-    // Может можно посчитать активные задачи короче?
-    arrLength () {
-      const doneCounter = this.mytasks.filter(t => !t.done)
-      return doneCounter.length
     }
   }
 }

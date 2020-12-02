@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <h1>Task Monk ToDo List</h1>
+    <h3>Осталось сделать</h3>
+    <span class="big_counter">{{ arrLength }}</span>
+    <addMyTask
+    v-on:task-data = "taskData"
+    />
     <nav>
       <router-link to = "/">My Task</router-link>
       <router-link to = "/public">Public Task</router-link>
@@ -29,7 +33,12 @@
 </style>
 
 <script>
+import addMyTask from '@/components/mytask/addMyTask'
+
 export default {
+  components: {
+    addMyTask
+  },
   data () {
     return {
       users: [
@@ -102,6 +111,12 @@ export default {
       // Можно использовать одни и те же названия переменных?
       const currentIndex = this.archived.indexOf(task)
       this.archived.splice(currentIndex, 1)
+    }
+  },
+  computed: {
+    // Может можно посчитать активные задачи короче?
+    arrLength () {
+      return this.mytasks.filter(t => !t.done).length
     }
   }
 }
