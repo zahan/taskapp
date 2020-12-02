@@ -5,16 +5,24 @@
     <addMyTask
     v-on:task-data = "addTask"
     />
+    <taskList
+    v-if="ongoingTasksList.length"
+    v-bind:mytasks="ongoingTasksList"
+
+    v-on:task-done="taskDone"
+    />
+    <p v-else>No tasks yet</p>
+    <hr/>
     <nav>
       <router-link to = "/">My Task</router-link>
       <!-- <router-link to = "/public">Public Task</router-link> -->
       <router-link to = "/archived">Archived Task</router-link>
     </nav>
     <router-view
-    v-bind:mytasks = "mytasks"
+    v-bind:mytasks ="mytasks"
     v-bind:archived="archived"
 
-    v-on:task-done = "taskDone"
+    v-on:task-done ="taskDone"
     @task-ongoing="taskOngoing"
     @to-archive="toArchive"
     @activate-task="activateTask"
@@ -30,10 +38,11 @@
 
 <script>
 import addMyTask from '@/components/mytask/addMyTask'
+import taskList from '@/components/mytask/taskList.vue'
 
 export default {
   components: {
-    addMyTask
+    addMyTask, taskList
   },
   data () {
     return {
@@ -98,6 +107,9 @@ export default {
     // Может можно посчитать активные задачи короче?
     arrLength () {
       return this.mytasks.filter(t => !t.done).length
+    },
+    ongoingTasksList () {
+      return this.mytasks.filter(t => !t.done)
     }
   }
 }

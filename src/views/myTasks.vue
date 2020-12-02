@@ -1,13 +1,5 @@
 <template>
   <div>
-    <taskList
-    v-if = "ongoingTasksList.length"
-    v-bind:mytasks = "ongoingTasksList"
-
-    v-on:task-done="taskDone"
-    @task-ongoing="taskOngoing"
-    />
-    <p v-else>No tasks yet</p>
     <h3>Done</h3>
     <hr/>
     <taskList
@@ -49,9 +41,6 @@ export default {
   computed: {
     doneTasksList () {
       return this.mytasks.filter(t => t.done)
-    },
-    ongoingTasksList () {
-      return this.mytasks.filter(t => !t.done)
     }
   }
 }
