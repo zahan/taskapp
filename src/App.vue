@@ -1,32 +1,37 @@
 <template>
   <div id="app">
-    <h3>Осталось сделать</h3>
-    <span class="big_counter">{{ arrLength }}</span>
-    <addMyTask
-    v-on:task-data = "addTask"
-    />
-    <taskList
-    v-if="ongoingTasksList.length"
-    v-bind:mytasks="ongoingTasksList"
+    <div class="wrapper">
+      <div class="counter">
+        <h3>Осталось сделать</h3>
+        <span class="big_counter">{{ arrLength }}</span>
+      </div>
+      <addMyTask
+      v-on:task-data = "addTask"
+      />
 
-    v-on:task-done="taskDone"
-    />
-    <p v-else>No tasks yet</p>
-    <hr/>
-    <nav>
-      <router-link to = "/">My Task</router-link>
-      <!-- <router-link to = "/public">Public Task</router-link> -->
-      <router-link to = "/archived">Archived Task</router-link>
-    </nav>
-    <router-view
-    v-bind:mytasks ="mytasks"
-    v-bind:archived="archived"
+      <taskList
+      v-if="ongoingTasksList.length"
+      v-bind:mytasks="ongoingTasksList"
 
-    v-on:task-done ="taskDone"
-    @task-ongoing="taskOngoing"
-    @to-archive="toArchive"
-    @activate-task="activateTask"
-    />
+      v-on:task-done="taskDone"
+      />
+      <p v-else>No tasks yet</p>
+
+      <nav>
+        <router-link to = "/archived">Архив</router-link>
+        <router-link to = "/">Сделано</router-link>
+        <!-- <router-link to = "/public">Public Task</router-link> -->
+      </nav>
+      <router-view
+      v-bind:mytasks ="mytasks"
+      v-bind:archived="archived"
+
+      v-on:task-done ="taskDone"
+      @task-ongoing="taskOngoing"
+      @to-archive="toArchive"
+      @activate-task="activateTask"
+      />
+    </div>
   </div>
 </template>
 

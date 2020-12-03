@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h3>Done</h3>
-    <hr/>
     <taskList
     v-if = "doneTasksList.length"
     v-bind:mytasks = "doneTasksList"

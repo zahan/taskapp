@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h3>Archived Tasks</h3>
-    <hr/>
     <archivedList
     v-if = "archived.length"
     v-bind:archived = "archived"

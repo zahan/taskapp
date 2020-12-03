@@ -1,22 +1,24 @@
 <template>
-  <li>
+  <li class="task">
     <span v-bind:class="{ done: task.done }">
-      <button
-      v-if="!task.done"
-      v-on:click="$emit('task-done', task.id)"
-      >Done</button>
 
-      <button
-      v-else
-      @click="$emit('task-ongoing', task.id)"
-      >Ongoing</button>
-
-      {{ task.taskname }}
-
-      <button
+      <button class="archive-button"
       v-if="task.done"
       @click="$emit('to-archive', task.id)"
-      >Archive</button>
+      ><img src="@/assets/minus.svg"/></button>
+
+      <p>{{ task.taskname }}</p>
+
+      <button class="done-button"
+      v-if="!task.done"
+      v-on:click="$emit('task-done', task.id)"
+      ></button>
+
+      <button class="ongoing-button"
+      v-else
+      @click="$emit('task-ongoing', task.id)"
+      ><img src="@/assets/tick.svg"/></button>
+
     </span>
   </li>
 </template>

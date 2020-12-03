@@ -2,10 +2,10 @@
   <form v-on:submit.prevent = "onSubmit">
     <input
     type="text"
-    placeholder="Новая задача"
+    placeholder="Добавить ещё одно дело"
     v-model = "inputData"
     >
-    <button type="submit">ADD</button>
+    <button class="addtaskbutton" type="submit">+</button>
   </form>
 </template>
 
