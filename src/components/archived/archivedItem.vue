@@ -1,9 +1,11 @@
 <template>
-  <li>
-    {{ task.taskname }}
-    <button
-    @click="$emit('activate-task', task)"
-    >Activate</button>
+  <li class="task">
+    <span>
+      <p>{{ task.taskname }}</p>
+      <button class="revert-button"
+      @click="$emit('activate-task', task)"
+      ><img src="@/assets/revert.svg"/></button>
+    </span>
   </li>
 </template>
 

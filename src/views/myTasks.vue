@@ -8,7 +8,7 @@
     @task-ongoing="taskOngoing"
     @to-archive="toArchive"
     />
-    <p v-else>No tasks yet</p>
+    <p class="notask" v-else>✊ Нет ни одной выполненной задачи</p>
   </div>
 </template>
 

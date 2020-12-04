@@ -8,19 +8,18 @@
       <addMyTask
       v-on:task-data = "addTask"
       />
-
+      <hr/>
       <taskList
       v-if="ongoingTasksList.length"
       v-bind:mytasks="ongoingTasksList"
 
       v-on:task-done="taskDone"
       />
-      <p v-else>No tasks yet</p>
+      <p class="notask" v-else>🤘 Все сделано</p>
 
       <nav>
-        <router-link to = "/archived">Архив</router-link>
-        <router-link to = "/">Сделано</router-link>
-        <!-- <router-link to = "/public">Public Task</router-link> -->
+        <router-link active-class="active" exact="true" to = "/archived">Архив</router-link>
+        <router-link active-class="active" exact="true" to = "/">Сделано</router-link>
       </nav>
       <router-view
       v-bind:mytasks ="mytasks"
@@ -32,6 +31,7 @@
       @activate-task="activateTask"
       />
     </div>
+
   </div>
 </template>
 

@@ -5,7 +5,7 @@
     v-bind:archived = "archived"
     @activate-task="activateTask"
     />
-    <p v-else>No tasks yet</p>
+    <p class="notask" v-else>🤷‍♂ Архив задач пуст</p>
 
   </div>
 </template>
